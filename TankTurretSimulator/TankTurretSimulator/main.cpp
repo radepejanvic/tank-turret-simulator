@@ -8,6 +8,8 @@
 #include <sstream>
 
 #include "shader.h"
+#include "led.h"
+#include "input_handler.h"
 
 //Biblioteke OpenGL-a
 #include <GL/glew.h>   //Omogucava upotrebu OpenGL naredbi
@@ -61,6 +63,7 @@ int main(void)
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++ PROMJENLJIVE I BAFERI +++++++++++++++++++++++++++++++++++++++++++++++++
 
     Shader shader("basic.vert", "basic.frag");
+    InputHandler::init(window);
 
     float vertices[] = //Tjemena trougla koja sadrze sve informacije o njemu. Mi definisemo podatke u onom formatu koju mi zelimo
     {
@@ -109,12 +112,23 @@ int main(void)
     float uX = 0.0;
     float uY = 0.0;
 
+    LED led(0.2f, 0.2f, 0.2, 40);
+
+    int number = 0;
+
     while (!glfwWindowShouldClose(window)) //Beskonacna petlja iz koje izlazimo tek kada prozor treba da se zatvori
     {
         //Unos od korisnika bez callback funckcije. GLFW_PRESS = Dugme je trenutno pritisnuto. GLFW_RELEASE = Dugme trenutno nije pritisnuto
 
         //Brisanje ekrana
         glClear(GL_COLOR_BUFFER_BIT);
+
+        if (InputHandler::isKeyPressed(GLFW_KEY_SPACE)) {
+            //led.Toggle();
+            number++;
+        }
+
+        led.Draw();
 
         // [KOD ZA CRTANJE]
         shader.use();
@@ -131,7 +145,7 @@ int main(void)
         //Hvatanje dogadjaja koji se ticu okvira prozora (promjena velicine, pomjeranje itd)
         glfwPollEvents();
     }
-
+    std::cout << number << std::endl;
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++ POSPREMANJE +++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -164,7 +178,7 @@ void processInput(GLFWwindow* window, float* uX, float* uY, const Shader &shader
         (*uY) = 0.0;
     }
 
-    std::cout << *uX << " " << *uY << std::endl;
+    //std::cout << *uX << " " << *uY << std::endl;
     shader.setFloat("uX", *uX);
     shader.setFloat("uY", *uY);
 }

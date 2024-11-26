@@ -130,19 +130,25 @@
   <ItemGroup>
     <None Include="basic.frag" />
     <None Include="basic.vert" />
+    <None Include="led.frag" />
+    <None Include="led.vert" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
     <ClCompile Include="input_handler.cpp" />
+    <ClCompile Include="led.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="actions.h" />
     <ClInclude Include="input_handler.h" />
+    <ClInclude Include="led.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
