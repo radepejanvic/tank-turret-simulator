@@ -9,8 +9,8 @@
 class LED {
 public: 
 	LED(float x, float y, float radius, int segments);
-	void Toggle();
-	void Draw();
+	void toggle();
+	void draw();
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;

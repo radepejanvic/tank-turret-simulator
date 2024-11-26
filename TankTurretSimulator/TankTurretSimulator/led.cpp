@@ -21,12 +21,12 @@ LED::LED(float x, float y, float radius, int segments) : x(x), y(y), radius(radi
     glBindVertexArray(0);
 }
 
-void LED::Toggle()
+void LED::toggle()
 {
 	isOn = !isOn;
 }
 
-void LED::Draw()
+void LED::draw()
 {
     shader.use();
     glBindVertexArray(VAO);
