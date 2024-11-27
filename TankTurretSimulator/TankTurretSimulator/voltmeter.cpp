@@ -101,13 +101,18 @@ void Voltmeter::decrease()
 	currV = (currV - step < 0) ? 0 : currV -= step;
 }
 
-void Voltmeter::draw()
+float Voltmeter::getRatio() const
+{
+	return currV / maxV;
+}
+
+void Voltmeter::draw() const
 {
 	drawBase();
 	drawLine();
 }
 
-void Voltmeter::drawBase()
+void Voltmeter::drawBase() const
 {
 	shader.use();
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -120,7 +125,8 @@ void Voltmeter::drawBase()
 	glUseProgram(0);
 }
 
-void Voltmeter::drawLine() {
+void Voltmeter::drawLine() const
+{
 
 	float angle = -glm::radians((currV / maxV) * 180.0);
 

@@ -14,7 +14,8 @@ public:
 	void toggle();
 	void increase();
 	void decrease();
-	void draw();
+	float getRatio() const;
+	void draw() const;
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;
@@ -26,8 +27,8 @@ private:
 	unsigned int lVAO, lVBO, bVAO, bVBO, bEBO, texture;
 	Shader shader;
 
-	void drawBase();
-	void drawLine();
+	void drawBase() const;
+	void drawLine() const;
 
 };
 
