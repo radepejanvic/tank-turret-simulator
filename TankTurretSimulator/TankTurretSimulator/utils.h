@@ -13,6 +13,7 @@
 
 std::vector<float> generateCircleVertices(float centerX, float centerY, float radius, int segments);
 glm::mat3 generateRotationMat3(float x, float y, float angle);
+glm::mat3 generateTranslationMat3Y(float y);
 unsigned int loadTexture(const char *path); 
 
 #endif // !UTILS_H

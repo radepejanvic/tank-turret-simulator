@@ -32,6 +32,12 @@
       <Filter>Source Files\Shader Files</Filter>
     </None>
     <None Include="line.vert" />
+    <None Include="ammo.frag">
+      <Filter>Source Files\Shader Files</Filter>
+    </None>
+    <None Include="ammo.vert">
+      <Filter>Source Files\Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,6 +61,9 @@
     <ClCompile Include="voltmeter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ammo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input_handler.h">
@@ -76,6 +85,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="voltmeter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ammo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

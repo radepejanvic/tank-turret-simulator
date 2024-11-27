@@ -8,6 +8,7 @@
 #include "led.h"
 #include "input_handler.h"
 #include "voltmeter.h"
+#include "ammo.h"
 
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
@@ -48,6 +49,7 @@ int main(void)
     InputHandler::init(window);
     LED led(0.2f, 0.2f, 0.2, 100);
     Voltmeter voltmeter(20, 1, -0.2, -0.2, 0.5);
+    Ammo ammo(10, -0.3, -0.8, 0.2, 1.0, 0.02);
     //voltmeter.increase();
     //voltmeter.increase();
     //voltmeter.increase();
@@ -58,16 +60,22 @@ int main(void)
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
 
+        if (InputHandler::isKeyPressed(GLFW_KEY_SPACE)) {
+            led.toggle();
+        }
+
         glClear(GL_COLOR_BUFFER_BIT);
 
         led.draw();
         voltmeter.draw();
+        ammo.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
         voltmeter.increase();
+        ammo.fire();
 
     }
 

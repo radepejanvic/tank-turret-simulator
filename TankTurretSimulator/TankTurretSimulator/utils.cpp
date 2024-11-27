@@ -30,6 +30,17 @@ glm::mat3 generateRotationMat3(float x, float y, float angle)
     return transform;
 }
 
+glm::mat3 generateTranslationMat3Y(float deltaY)
+{
+    glm::mat3 transform = glm::mat3(
+        1, 0, 0,  
+        0, 1, 0,  
+        0, deltaY, 1   
+    );
+
+    return transform;
+}
+
 unsigned int loadTexture(const char* path)
 {
 	unsigned int texture; 

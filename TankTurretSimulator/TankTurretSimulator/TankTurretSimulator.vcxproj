@@ -129,6 +129,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ammo.frag" />
+    <None Include="ammo.vert" />
     <None Include="led.frag" />
     <None Include="led.vert" />
     <None Include="line.vert" />
@@ -138,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
+    <ClCompile Include="ammo.cpp" />
     <ClCompile Include="input_handler.cpp" />
     <ClCompile Include="led.cpp" />
     <ClCompile Include="main.cpp" />
@@ -148,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="actions.h" />
+    <ClInclude Include="ammo.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="led.h" />
     <ClInclude Include="shader.h">
