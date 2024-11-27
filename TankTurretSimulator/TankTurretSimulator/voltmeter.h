@@ -4,10 +4,13 @@
 #include "utils.h"
 #include "shader.h"
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Voltmeter {
 public:
-	Voltmeter(float maxV, float step, float x, float y, float w, float h);
+	Voltmeter(float maxV, float step, float x, float y, float a);
 	void toggle();
 	void increase();
 	void decrease();
@@ -19,7 +22,7 @@ public:
 private:
 	bool isOn;
 	float maxV, currV, step;
-	float x, y, w, h;
+	float x, y, a;
 	unsigned int lVAO, lVBO, bVAO, bVBO, bEBO, texture;
 	Shader shader;
 

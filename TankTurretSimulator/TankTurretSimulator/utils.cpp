@@ -15,3 +15,17 @@ std::vector<float> generateCircleVertices(float centerX, float centerY, float ra
     
     return vertices;
 }
+
+glm::mat3 generateRotationMat3(float x, float y, float angle)
+{
+    float cosA = glm::cos(angle);
+    float sinA = glm::sin(angle);
+
+    glm::mat3 transform = glm::mat3(
+        cosA,                    sinA,                    0,  // First column
+        -sinA,                   cosA,                    0,  // Second column
+        x - x * cosA + y * sinA, y - x * sinA - y * cosA, 1   // Third column
+    );
+
+    return transform;
+}

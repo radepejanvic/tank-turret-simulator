@@ -6,13 +6,13 @@ const char* Voltmeter::VERT_SHADER = "voltmeter.vert";
 const char* Voltmeter::FRAG_SHADER = "voltmeter.frag";
 const char* Voltmeter::TEXTURE = "Voltmeter.png";
 
-Voltmeter::Voltmeter(float maxV, float step, float x, float y, float w, float h): maxV(maxV), step(step), x(x), y(y), w(w), h(h), isOn(false), currV(0), shader(VERT_SHADER, FRAG_SHADER)
+Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(maxV), step(step), x(x), y(y), a(a), isOn(false), currV(0), shader(VERT_SHADER, FRAG_SHADER)
 {
 	float base[] = {
-		x,     y,     0.0, 1.0,
-		x + w, y,     1.0, 1.0, 
-		x + w, y - h, 1.0, 0.0, 
-		x,     y - h, 0.0, 0.0
+		x - a/2, y + a/2, 1.0,    0.0, 1.0,
+		x + a/2, y + a/2, 1.0,    1.0, 1.0,
+		x + a/2, y - a/2, 1.0,    1.0, 0.0,
+		x - a/2, y - a/2, 1.0,    0.0, 0.0
 	};
 
 	unsigned int indices[] = {
@@ -31,10 +31,10 @@ Voltmeter::Voltmeter(float maxV, float step, float x, float y, float w, float h)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -65,8 +65,8 @@ Voltmeter::Voltmeter(float maxV, float step, float x, float y, float w, float h)
 	stbi_image_free(data);
 
 	float line[] = {
-		x + w/2, y - h/2, 
-		x + w/2 - 0.8 * w/2, y - h/2
+		x, y, 1.0,
+		x - 0.8 * a/2, y, 1.0
 	};
 
 	glGenVertexArrays(1, &lVAO);
@@ -74,9 +74,9 @@ Voltmeter::Voltmeter(float maxV, float step, float x, float y, float w, float h)
 
 	glGenBuffers(1, &lVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(float), line, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(line), line, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -114,15 +114,21 @@ void Voltmeter::drawBase()
 	shader.setInt("aTexture", 0);
 	glBindVertexArray(bVAO);
 
+	shader.setBool("isLine", false);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glUseProgram(0);
 }
 
 void Voltmeter::drawLine() {
+
+	float angle = -glm::radians((currV / maxV) * 180.0);
+
 	shader.use();
 	glBindVertexArray(lVAO);
 
+	shader.setBool("isLine", true);
+	shader.setMat3("transform", generateRotationMat3(x, y, angle));
 	glLineWidth(5.0f);
 	glDrawArrays(GL_LINES, 0, 2);
 

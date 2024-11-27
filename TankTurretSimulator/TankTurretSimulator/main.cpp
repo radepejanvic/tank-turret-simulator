@@ -12,6 +12,9 @@
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
 
+#include <thread>
+#include <chrono>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -43,15 +46,18 @@ int main(void)
     }
 
     InputHandler::init(window);
-    LED led(0.2f, 0.2f, 0.2, 40);
-    Voltmeter voltmeter(10, 1, -0.2, -0.2, 0.5, 0.5);
+    LED led(0.2f, 0.2f, 0.2, 100);
+    Voltmeter voltmeter(20, 1, -0.2, -0.2, 0.5);
+    //voltmeter.increase();
+    //voltmeter.increase();
+    //voltmeter.increase();
 
     while (!glfwWindowShouldClose(window)) 
     {
         if (InputHandler::isKeyPressed(GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
-     
+
         glClear(GL_COLOR_BUFFER_BIT);
 
         led.draw();
@@ -59,6 +65,10 @@ int main(void)
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 
+
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        voltmeter.increase();
+
     }
 
     glfwTerminate();

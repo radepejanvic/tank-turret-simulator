@@ -31,6 +31,7 @@
     <None Include="voltmeter.frag">
       <Filter>Source Files\Shader Files</Filter>
     </None>
+    <None Include="line.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
