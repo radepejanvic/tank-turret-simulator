@@ -7,9 +7,13 @@
 #include "shader.h"
 #include "led.h"
 #include "input_handler.h"
+#include "voltmeter.h"
 
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 int main(void)
 {
@@ -40,6 +44,7 @@ int main(void)
 
     InputHandler::init(window);
     LED led(0.2f, 0.2f, 0.2, 40);
+    Voltmeter voltmeter(10, 1, -0.2, -0.2, 0.5, 0.5);
 
     while (!glfwWindowShouldClose(window)) 
     {
@@ -50,6 +55,7 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         led.draw();
+        voltmeter.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 

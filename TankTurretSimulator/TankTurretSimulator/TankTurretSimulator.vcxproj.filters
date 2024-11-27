@@ -19,16 +19,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="basic.frag">
-      <Filter>Source Files\Shader Files</Filter>
-    </None>
-    <None Include="basic.vert">
-      <Filter>Source Files\Shader Files</Filter>
-    </None>
     <None Include="led.vert">
       <Filter>Source Files\Shader Files</Filter>
     </None>
     <None Include="led.frag">
+      <Filter>Source Files\Shader Files</Filter>
+    </None>
+    <None Include="voltmeter.vert">
+      <Filter>Source Files\Shader Files</Filter>
+    </None>
+    <None Include="voltmeter.frag">
       <Filter>Source Files\Shader Files</Filter>
     </None>
   </ItemGroup>
@@ -51,6 +51,9 @@
     <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="voltmeter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input_handler.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="voltmeter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

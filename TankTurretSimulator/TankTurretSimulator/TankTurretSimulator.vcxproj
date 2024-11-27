@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>stb_image.h</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,11 +129,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="basic.frag" />
-    <None Include="basic.vert" />
     <None Include="led.frag" />
     <None Include="led.vert" />
     <None Include="packages.config" />
+    <None Include="voltmeter.frag" />
+    <None Include="voltmeter.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
@@ -141,14 +142,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="voltmeter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="actions.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="led.h" />
-    <ClInclude Include="shader.h" />
+    <ClInclude Include="shader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="utils.h" />
+    <ClInclude Include="voltmeter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
