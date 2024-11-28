@@ -12,11 +12,14 @@ LED::LED(float x, float y, float a) : x(x), y(y), a(a), isOn(false), shader(VERT
 
 void LED::toggle()
 {
+	std::lock_guard<std::mutex> lock(m);
 	isOn = !isOn;
 }
 
 void LED::draw()
 {
+	std::lock_guard<std::mutex> lock(m);
+
 	shader.use();
 	glBindTexture(GL_TEXTURE_2D, texture);
 	shader.setInt("aTexture", 0);

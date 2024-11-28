@@ -45,16 +45,19 @@ Ammo::Ammo(float maxA, float x, float y, float w, float h, float margin) : maxA(
 
 void Ammo::fire()
 {
+	std::lock_guard<std::mutex> lock(m);
 	currA = currA-- < 0 ? 0 : currA--;
 }
 
 void Ammo::reload()
 {
+	std::lock_guard<std::mutex> lock(m);
 	currA = maxA;
 }
 
-void Ammo::draw() const
+void Ammo::draw()
 {
+	std::lock_guard<std::mutex> lock(m);
 	shader.use();
 	glBindTexture(GL_TEXTURE_2D, texture);
 	shader.setInt("aTexture", 0);

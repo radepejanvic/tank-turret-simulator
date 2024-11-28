@@ -5,6 +5,7 @@
 #include "shader.h"
 #include <GL/glew.h>
 #include <string>
+#include <mutex>
 
 class LED {
 public: 
@@ -20,6 +21,7 @@ private:
 	float x, y, a;
 	unsigned int VAO, texture;
 	Shader shader;
+	std::mutex m;
 };
 
 #endif // !LED_H

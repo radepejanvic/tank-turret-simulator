@@ -19,6 +19,22 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+void handleFire(Ammo& ammo, LED& led) {
+    // Fire a shot
+    ammo.fire();
+
+    // Toggle the LED on
+    led.toggle();
+
+    // Start a separate thread for the timer
+    std::thread timerThread([&led]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(7500)); // 7.5 seconds
+        led.toggle(); // Toggle LED off
+        });
+
+    timerThread.detach(); // Detach so it doesn't block the main thread
+}
+
 int main(void)
 {
     if (!glfwInit()) 
@@ -31,7 +47,11 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(1000, 1000, "Tank Turret Simulator", NULL, NULL); 
+    /*GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+    GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Tank Turret Simulator", monitor, NULL);*/
+    GLFWwindow* window = glfwCreateWindow(1000, 1000, "Tank Turret Simulator", NULL, NULL);
     if (window == NULL) 
     {
         std::cout << "WINDOW::NOT CREATED" << std::endl;
@@ -47,12 +67,14 @@ int main(void)
     }
 
     InputHandler::init(window);
-    LED led(0.2f, 0.2f, 0.1);
-    Voltmeter voltmeter(20, 1, -0.2, -0.2, 0.5);
-    Ammo ammo(10, -0.3, -0.8, 0.2, 1.0, 0.02);
+    Ammo ammo(10, 0.6, -0.5, 0.2, 1.0, 0.02);
+    LED led(0.5, -0.45, 0.1);
+    Voltmeter voltmeter(20, 1, -0.6, -0.3, 0.5);
     //voltmeter.increase();
     //voltmeter.increase();
     //voltmeter.increase();
+
+    int i = 0;
 
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
@@ -70,10 +92,15 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents(); 
 
+        if (i == 0) {
+            handleFire(ammo, led);
+            i++;
+        }
+
         std::this_thread::sleep_for(std::chrono::seconds(1));
         voltmeter.increase();
-        ammo.fire();
-        led.toggle();
+        //ammo.fire();
+        //led.toggle();
 
     }
 
