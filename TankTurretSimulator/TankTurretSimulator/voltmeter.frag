@@ -11,6 +11,11 @@ void main()
     if (isLine) {
         FragColor = vec4(0.1843, 0.6196, 0.2667, 1.0);
     } else {
-        FragColor = texture(aTexture, TexCoord);
+        vec4 texColor = texture(aTexture, TexCoord);
+    
+        if (texColor.a < 0.1)
+            discard;
+    
+        FragColor = texColor;
     } 
 }

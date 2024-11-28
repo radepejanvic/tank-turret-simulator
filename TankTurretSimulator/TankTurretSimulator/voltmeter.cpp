@@ -4,7 +4,7 @@
 
 const char* Voltmeter::VERT_SHADER = "voltmeter.vert";
 const char* Voltmeter::FRAG_SHADER = "voltmeter.frag";
-const char* Voltmeter::TEXTURE = "Voltmeter.png";
+const char* Voltmeter::TEXTURE = "Voltmeter3.png";
 
 Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(maxV), step(step), x(x), y(y), a(a), isOn(false), currV(0), shader(VERT_SHADER, FRAG_SHADER)
 {

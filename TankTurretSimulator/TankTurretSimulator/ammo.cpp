@@ -12,7 +12,7 @@ Ammo::Ammo(float maxA, float x, float y, float w, float h, float margin) : maxA(
 		x,     y + unit_h, 1.0,    0.0, 1.0,
 		x + w, y + unit_h, 1.0,    1.0, 1.0,
 		x + w, y,          1.0,    1.0, 0.0,
-		x,     y,           1.0,    0.0, 0.0
+		x,     y,          1.0,    0.0, 0.0
 	}; 
 
 	unsigned int indices[] = {
