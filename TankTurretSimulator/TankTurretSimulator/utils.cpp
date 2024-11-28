@@ -56,6 +56,46 @@ unsigned int generateTexturedSquare(float x, float y, float a)
 	return VAO; 
 }
 
+unsigned int generateTexturedRect(float x, float y, float w, float h)
+{
+	float base[] = {
+		x - w / 2, y + h / 2, 1.0,    0.0, 1.0,
+		x + w / 2, y + h / 2, 1.0,    1.0, 1.0,
+		x + w / 2, y - h / 2, 1.0,    1.0, 0.0,
+		x - w / 2, y - h / 2, 1.0,    0.0, 0.0
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(base), base, GL_STATIC_DRAW);
+
+	unsigned int EBO;
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	return VAO;
+}
+
 unsigned int generateLine(float x1, float y1, float x2, float y2)
 {
 	float line[] = {

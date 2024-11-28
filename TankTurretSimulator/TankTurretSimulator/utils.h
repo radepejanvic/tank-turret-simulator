@@ -13,9 +13,10 @@
 
 std::vector<float> generateCircleVertices(float centerX, float centerY, float radius, int segments);
 unsigned int generateTexturedSquare(float x, float y, float a);
+unsigned int generateTexturedRect(float x, float y, float w, float h);
 unsigned int generateLine(float x1, float y1, float x2, float y2);
 glm::mat3 generateRotationMat3(float x, float y, float angle);
 glm::mat3 generateTranslationMat3Y(float y);
-unsigned int loadTexture(const char *path); 
+unsigned int loadTexture(const char* path);
 
 #endif // !UTILS_H
