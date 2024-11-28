@@ -12,6 +12,7 @@ public:
 	LED(float x, float y, float a);
 	void toggle();
 	void draw();
+	bool getIsOn();
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;

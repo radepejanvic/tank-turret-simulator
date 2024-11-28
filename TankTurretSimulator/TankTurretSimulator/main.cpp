@@ -9,6 +9,7 @@
 #include "input_handler.h"
 #include "voltmeter.h"
 #include "ammo.h"
+#include "turret.h"
 
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
@@ -18,22 +19,6 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
-void handleFire(Ammo& ammo, LED& led) {
-    // Fire a shot
-    ammo.fire();
-
-    // Toggle the LED on
-    led.toggle();
-
-    // Start a separate thread for the timer
-    std::thread timerThread([&led]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(7500)); // 7.5 seconds
-        led.toggle(); // Toggle LED off
-        });
-
-    timerThread.detach(); // Detach so it doesn't block the main thread
-}
 
 int main(void)
 {
@@ -67,12 +52,7 @@ int main(void)
     }
 
     InputHandler::init(window);
-    Ammo ammo(10, 0.6, -0.5, 0.2, 1.0, 0.02);
-    LED led(0.5, -0.45, 0.1);
-    Voltmeter voltmeter(20, 1, -0.6, -0.3, 0.5);
-    //voltmeter.increase();
-    //voltmeter.increase();
-    //voltmeter.increase();
+    Turret turret;
 
     int i = 0;
 
@@ -85,22 +65,11 @@ int main(void)
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        led.draw();
-        voltmeter.draw();
-        ammo.draw();
+        turret.draw();
+        turret.fire();
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 
-
-        if (i == 0) {
-            handleFire(ammo, led);
-            i++;
-        }
-
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        voltmeter.increase();
-        //ammo.fire();
-        //led.toggle();
 
     }
 

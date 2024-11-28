@@ -15,6 +15,7 @@ public:
 	void fire();
 	void reload();
 	void draw();
+	bool isEmpty();
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;

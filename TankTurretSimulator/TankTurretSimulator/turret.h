@@ -8,6 +8,8 @@
 class Turret {
 public: 
 	Turret();
+	void fire();
+	void draw();
 
 private: 
 	Ammo ammo; 

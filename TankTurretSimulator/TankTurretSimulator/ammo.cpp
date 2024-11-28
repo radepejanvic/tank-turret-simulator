@@ -72,3 +72,9 @@ void Ammo::draw()
 
 	glUseProgram(0);
 }
+
+bool Ammo::isEmpty()
+{
+	std::lock_guard<std::mutex> lock(m);
+	return currA == 0;
+}

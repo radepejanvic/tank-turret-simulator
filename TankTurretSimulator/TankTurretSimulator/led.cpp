@@ -4,7 +4,7 @@ const char* LED::VERT_SHADER = "led.vert";
 const char* LED::FRAG_SHADER = "led.frag";
 const char* LED::TEXTURE = "Led.png";
 
-LED::LED(float x, float y, float a) : x(x), y(y), a(a), isOn(false), shader(VERT_SHADER, FRAG_SHADER)
+LED::LED(float x, float y, float a) : x(x), y(y), a(a), isOn(true), shader(VERT_SHADER, FRAG_SHADER)
 {
     VAO = generateTexturedSquare(x, y, a);
 	texture = loadTexture(TEXTURE);
@@ -30,5 +30,11 @@ void LED::draw()
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glUseProgram(0);
+}
+
+bool LED::getIsOn()
+{
+	std::lock_guard<std::mutex> lock(m);
+	return isOn;
 }
 
