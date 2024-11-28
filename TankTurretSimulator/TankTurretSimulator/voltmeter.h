@@ -24,12 +24,11 @@ private:
 	bool isOn;
 	float maxV, currV, step;
 	float x, y, a;
-	unsigned int lVAO, lVBO, bVAO, bVBO, bEBO, texture;
+	unsigned int lVAO, bVAO, texture;
 	Shader shader;
 
 	void drawBase() const;
 	void drawLine() const;
-
 };
 
 #endif // !VOLTMETER_H
