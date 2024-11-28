@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 std::vector<float> generateCircleVertices(float centerX, float centerY, float radius, int segments);
+unsigned int generateTexturedSquare(float x, float y, float a);
 glm::mat3 generateRotationMat3(float x, float y, float angle);
 glm::mat3 generateTranslationMat3Y(float y);
 unsigned int loadTexture(const char *path); 

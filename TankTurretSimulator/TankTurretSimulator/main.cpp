@@ -47,21 +47,18 @@ int main(void)
     }
 
     InputHandler::init(window);
-    LED led(0.2f, 0.2f, 0.2, 100);
+    LED led(0.2f, 0.2f, 0.1);
     Voltmeter voltmeter(20, 1, -0.2, -0.2, 0.5);
     Ammo ammo(10, -0.3, -0.8, 0.2, 1.0, 0.02);
     //voltmeter.increase();
     //voltmeter.increase();
     //voltmeter.increase();
 
+    glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
     {
         if (InputHandler::isKeyPressed(GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
-        }
-
-        if (InputHandler::isKeyPressed(GLFW_KEY_SPACE)) {
-            led.toggle();
         }
 
         glClear(GL_COLOR_BUFFER_BIT);
@@ -76,6 +73,7 @@ int main(void)
         std::this_thread::sleep_for(std::chrono::seconds(1));
         voltmeter.increase();
         ammo.fire();
+        led.toggle();
 
     }
 

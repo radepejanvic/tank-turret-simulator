@@ -1,9 +1,21 @@
-#version 330 core 
+#version 330 core
+out vec4 FragColor;
 
-in vec4 chCol; 
-out vec4 outCol; 
+in vec2 TexCoord;
 
-void main() 
-{
-	outCol = chCol;
+uniform sampler2D aTexture;
+uniform bool isOn;
+uniform float dimFactor;     // A value between 0.0 (no dimming) and 1.0 (completely black)
+
+void main()
+{ 
+    vec4 texColor = texture(aTexture, TexCoord);
+    
+    if (!isOn)
+        texColor = mix(texColor, vec4(0.0, 0.0, 0.0, texColor.a), dimFactor);
+
+    if (texColor.a < 0.1)
+        discard;
+    
+    FragColor = texColor;
 }
