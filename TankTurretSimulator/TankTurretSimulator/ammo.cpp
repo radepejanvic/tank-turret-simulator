@@ -65,7 +65,7 @@ void Ammo::draw()
 
 	float deltaY = 0;
 	for (int i = 0; i < currA; i++) {
-		shader.setMat3("transform", generateTranslationMat3Y(deltaY));
+		shader.setMat3("transform", generateTranslationMat3Y(0, deltaY));
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		deltaY += margin + unit_h; 
 	}

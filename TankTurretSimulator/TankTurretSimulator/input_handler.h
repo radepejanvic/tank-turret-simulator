@@ -4,13 +4,19 @@
 
 class InputHandler {
 public:
+    static float mouseX, mouseY; 
     static void init(GLFWwindow* window);
 
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static bool isKeyPressed(int key);
-    static bool isKeyToggled(int key); 
+    static bool isKeyToggled(int key);
+    static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    static bool isMouseButtonPressed(int button);
+    static bool isMouseButtonToggled(int button);
 
 private:
     static std::unordered_map<int, bool> keyStates;
     static std::unordered_map<int, bool> toggledStates;
+    static std::unordered_map<int, bool> mouseButtonStates;
+    static std::unordered_map<int, bool> mouseButtonToggledStates;
 };

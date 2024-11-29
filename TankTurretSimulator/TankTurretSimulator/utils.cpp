@@ -135,12 +135,12 @@ glm::mat3 generateRotationMat3(float x, float y, float angle)
     return transform;
 }
 
-glm::mat3 generateTranslationMat3Y(float deltaY)
+glm::mat3 generateTranslationMat3Y(float deltaX, float deltaY)
 {
     glm::mat3 transform = glm::mat3(
         1, 0, 0,  
         0, 1, 0,  
-        0, deltaY, 1   
+        deltaX, deltaY, 1   
     );
 
     return transform;
@@ -174,4 +174,11 @@ unsigned int loadTexture(const char* path)
 	stbi_image_free(data);
     
 	return texture;
+}
+
+float distance(float x1, float y1, float x2, float y2)
+{
+	float dx = x1 - x2;
+	float dy = y1 - y2;
+	return std::sqrt(dx * dx + dy * dy);
 }

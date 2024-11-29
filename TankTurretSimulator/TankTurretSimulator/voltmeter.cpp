@@ -6,7 +6,7 @@ const char* Voltmeter::VERT_SHADER = "voltmeter.vert";
 const char* Voltmeter::FRAG_SHADER = "voltmeter.frag";
 const char* Voltmeter::TEXTURE = "Voltmeter3.png";
 
-Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(maxV), step(step), x(x), y(y), a(a), isOn(false), currV(0), shader(VERT_SHADER, FRAG_SHADER)
+Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(maxV), step(step), x(x), y(y), a(a), currV(0), shader(VERT_SHADER, FRAG_SHADER)
 {
 	bVAO = generateTexturedSquare(x, y, a);
 	texture = loadTexture(TEXTURE);
@@ -14,12 +14,8 @@ Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(ma
 	lVAO = generateLine(x, y, x - 0.8 * a / 2, y); 
 }
 
-void Voltmeter::toggle()
-{
-	isOn = !isOn;
-	if (!isOn) {
-		currV = 0;
-	}
+bool Voltmeter::isOn() {
+	return currV != 0;
 }
 
 void Voltmeter::increase()
@@ -34,7 +30,7 @@ void Voltmeter::decrease()
 
 float Voltmeter::getRatio() const
 {
-	return currV / maxV;
+	return currV == 0 ? step/maxV : currV/maxV;
 }
 
 void Voltmeter::draw() const
@@ -64,7 +60,13 @@ void Voltmeter::drawLine() const
 	glBindVertexArray(lVAO);
 
 	shader.setBool("isLine", true);
-	shader.setMat3("transform", generateRotationMat3(x, y, angle));
+	if (std::rand() % 10 == 1) {
+		shader.setMat3("transform", generateRotationMat3(x, y, angle + 0.03));
+	}
+	else {
+		shader.setMat3("transform", generateRotationMat3(x, y, angle));
+	}
+
 	glLineWidth(5.0f);
 	glDrawArrays(GL_LINES, 0, 2);
 

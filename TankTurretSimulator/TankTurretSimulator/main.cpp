@@ -12,6 +12,7 @@
 #include "turret.h"
 #include "visor.h"
 #include "panorama.h"
+#include "target.h"
 
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
@@ -22,11 +23,26 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+const int TARGET_FPS = 60;
+const int FRAME_DURATION_MS = 1000 / TARGET_FPS;
+
+auto lastFrameTime = std::chrono::high_resolution_clock::now();
+
+void limitFPS() {
+    auto currentFrameTime = std::chrono::high_resolution_clock::now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentFrameTime - lastFrameTime).count();
+
+    if (elapsedTime < FRAME_DURATION_MS) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(FRAME_DURATION_MS - elapsedTime));
+    }
+    lastFrameTime = std::chrono::high_resolution_clock::now();
+}
+
 int main(void)
 {
     if (!glfwInit()) 
     {
-        std::cout << "GLFW::NOT LOADED" << std::endl;
+        std::cout << "GLFW::NOT_LOADED" << std::endl;
         return 1;
     }
 
@@ -37,11 +53,11 @@ int main(void)
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
-    GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Tank Turret Simulator", monitor, NULL);
-    //GLFWwindow* window = glfwCreateWindow(1600, 900, "Tank Turret Simulator", NULL, NULL);
+    //GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Tank Turret Simulator", monitor, NULL);
+    GLFWwindow* window = glfwCreateWindow(1600, 900, "Tank Turret Simulator", NULL, NULL);
     if (window == NULL) 
     {
-        std::cout << "WINDOW::NOT CREATED" << std::endl;
+        std::cout << "WINDOW::NOT_CREATED" << std::endl;
         glfwTerminate(); 
         return 2;
     }
@@ -49,15 +65,15 @@ int main(void)
 
     if (glewInit() != GLEW_OK) 
     {
-        std::cout << "GLEW::NOT INITIALIZED" << std::endl;
+        std::cout << "GLEW::NOT_INITIALIZED" << std::endl;
         return 3;
     }
 
     InputHandler::init(window);
-    Turret turret;
-    Visor visor(-0.6, 0.7, 5.0);
-    Panorama panorama(0.0, 0.0, 7.0, 2.0);
 
+    Turret turret(0.01);
+
+    bool isEnterier = true; 
 
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
@@ -68,21 +84,41 @@ int main(void)
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        turret.draw();
-        turret.fire();
-        //visor.draw();
-        panorama.draw();
-
         if (InputHandler::isKeyPressed(GLFW_KEY_D)) {
-            panorama.moveRight(0.001);
+            turret.moveRight();
         }
 
         if (InputHandler::isKeyPressed(GLFW_KEY_A)) {
-            panorama.moveLeft(0.001);
+            turret.moveLeft();
         }
+
+        if (InputHandler::isKeyPressed(GLFW_KEY_V)) {
+            isEnterier = false;
+        }
+
+        if (InputHandler::isKeyPressed(GLFW_KEY_C)) {
+            isEnterier = true;
+        }
+
+        if (InputHandler::isKeyPressed(GLFW_KEY_S)) {
+            turret.decreaseV();
+        }
+
+        if (InputHandler::isKeyPressed(GLFW_KEY_W)) {
+            turret.increaseV();
+        }
+
+        if (InputHandler::isMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+            turret.fire(InputHandler::mouseX, InputHandler::mouseY);
+        }
+
+
+        turret.draw(isEnterier); 
+        
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 
+        limitFPS();
 
     }
 

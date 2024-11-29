@@ -137,6 +137,8 @@
     <None Include="packages.config" />
     <None Include="panorama.frag" />
     <None Include="panorama.vert" />
+    <None Include="target.frag" />
+    <None Include="target.vert" />
     <None Include="visor.frag" />
     <None Include="visor.vert" />
     <None Include="voltmeter.frag" />
@@ -150,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="panorama.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="target.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="visor.cpp" />
@@ -165,6 +168,7 @@
     <ClInclude Include="shader.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="target.h" />
     <ClInclude Include="turret.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="visor.h" />
