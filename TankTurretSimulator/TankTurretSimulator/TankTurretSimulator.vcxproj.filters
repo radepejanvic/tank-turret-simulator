@@ -44,6 +44,8 @@
     <None Include="panorama.frag" />
     <None Include="target.vert" />
     <None Include="target.frag" />
+    <None Include="text.vert" />
+    <None Include="text.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +84,9 @@
     <ClCompile Include="target.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="text_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input_handler.h">
@@ -118,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="text_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

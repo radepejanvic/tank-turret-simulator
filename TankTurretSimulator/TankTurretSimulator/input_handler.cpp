@@ -1,5 +1,7 @@
 #include "input_handler.h"
 
+float InputHandler::width;
+float InputHandler::height;
 float InputHandler::mouseX;
 float InputHandler::mouseY;
 std::unordered_map<int, bool> InputHandler::keyStates;
@@ -7,7 +9,9 @@ std::unordered_map<int, bool> InputHandler::toggledStates;
 std::unordered_map<int, bool> InputHandler::mouseButtonStates;
 std::unordered_map<int, bool> InputHandler::mouseButtonToggledStates;
 
-void InputHandler::init(GLFWwindow* window) {
+void InputHandler::init(GLFWwindow* window, float w, float h) {
+    width = w;
+    height = h;
     glfwSetKeyCallback(window, keyCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
 }
@@ -31,8 +35,8 @@ void InputHandler::mouseButtonCallback(GLFWwindow* window, int button, int actio
             double xpos, ypos;
             glfwGetCursorPos(window, &xpos, &ypos);
 
-            mouseX = (static_cast<float>(xpos) / 1600) * 2.0f - 1.0f;
-            mouseY = 1.0f - (static_cast<float>(ypos) / 900) * 2.0f;
+            mouseX = (static_cast<float>(xpos) / width) * 2.0f - 1.0f;
+            mouseY = 1.0f - (static_cast<float>(ypos) / height) * 2.0f;
         }
     }
     else if (action == GLFW_RELEASE) {

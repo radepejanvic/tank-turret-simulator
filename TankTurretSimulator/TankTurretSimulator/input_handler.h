@@ -4,8 +4,8 @@
 
 class InputHandler {
 public:
-    static float mouseX, mouseY; 
-    static void init(GLFWwindow* window);
+    static float width, height, mouseX, mouseY;
+    static void init(GLFWwindow* window, float w, float h);
 
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static bool isKeyPressed(int key);

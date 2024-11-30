@@ -13,15 +13,19 @@
 #include "visor.h"
 #include "panorama.h"
 #include "target.h"
+#include "text_handler.h"
 
 #include <GL/glew.h>   
 #include <GLFW/glfw3.h>
 
 #include <thread>
 #include <chrono>
+#include <map>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
+
 
 const int TARGET_FPS = 60;
 const int FRAME_DURATION_MS = 1000 / TARGET_FPS;
@@ -37,6 +41,11 @@ void limitFPS() {
     }
     lastFrameTime = std::chrono::high_resolution_clock::now();
 }
+
+std::chrono::steady_clock::time_point startTime;
+bool missionOver = false;
+std::string missionStatus = "";
+
 
 int main(void)
 {
@@ -69,11 +78,15 @@ int main(void)
         return 3;
     }
 
-    InputHandler::init(window);
-
+    InputHandler::init(window, 1600, 900);
+    TextHandler text("C:/Windows/Fonts/arial.ttf");
+    
     Turret turret(0.01);
 
     bool isEnterier = true; 
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
@@ -115,6 +128,8 @@ int main(void)
 
         turret.draw(isEnterier); 
         
+        text.renderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+        text.renderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 

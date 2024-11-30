@@ -5,7 +5,7 @@ in vec2 TexCoord;
 
 uniform sampler2D aTexture;
 uniform bool isOn;
-uniform float dimFactor;     // A value between 0.0 (no dimming) and 1.0 (completely black)
+uniform float dimFactor;     
 
 void main()
 { 
