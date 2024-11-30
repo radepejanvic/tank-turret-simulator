@@ -80,9 +80,8 @@ int main(void)
     }
 
     InputHandler::init(window, 1600, 900);
-    TextHandler text("C:/Windows/Fonts/arial.ttf");
     
-    Turret turret(0.01);
+    Turret turret(0.01, "C:/Windows/Fonts/arial.ttf");
 
     bool isEnterier = true; 
 
@@ -92,6 +91,9 @@ int main(void)
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
     {
+
+        if (turret.isEnd()) break;
+
         if (InputHandler::isKeyPressed(GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
@@ -128,27 +130,6 @@ int main(void)
 
 
         turret.draw(isEnterier); 
-        
-        text.renderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
-        text.renderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
-
-
-        float currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
-
-        countdownTimer.update(deltaTime);
-
-
-        std::string timerText = countdownTimer.getTimeString(); 
-        glm::vec3 timerColor(0.5, 0.8f, 0.2f);
-
-        text.renderText(timerText, 50.0f, 50.0f, 1.0f, timerColor);
-
-        if (countdownTimer.isFinished()) {
-            std::string resultText = "Mission Failed";  
-            text.renderText(resultText, 50.0f, 100.0f, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f)); 
-        }
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 
