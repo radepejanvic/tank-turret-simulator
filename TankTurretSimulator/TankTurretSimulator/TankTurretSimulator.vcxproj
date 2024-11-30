@@ -160,6 +160,7 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="target.cpp" />
     <ClCompile Include="text_handler.cpp" />
+    <ClCompile Include="timer.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="visor.cpp" />
@@ -177,6 +178,7 @@
     </ClInclude>
     <ClInclude Include="target.h" />
     <ClInclude Include="text_handler.h" />
+    <ClInclude Include="timer.h" />
     <ClInclude Include="turret.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="visor.h" />
