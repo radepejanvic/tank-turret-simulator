@@ -96,4 +96,14 @@ void Visor::calcGunOffset(float speed)
 
 	if (y > mouseY) y -= speedY;
 	else if (y < mouseY) y += speedY;
+
+	clampToCircle();
+}
+
+void Visor::clampToCircle() {
+	float length = std::sqrt(x * x + y * y);
+	if (length > 1.0f) {
+		x /= length;
+		y /= length;
+	}
 }

@@ -21,7 +21,7 @@ public:
 	static const char* FRAG_SHADER;
 	static const char* TEXTURE;
 private:
-	float x, y;
+	float x, y, aspectRatio;
 	float mouseX, mouseY;
 	unsigned int VAO, texture, lVAO, lVBO;
 	Shader shader;
@@ -30,6 +30,7 @@ private:
 	void drawCurr(float speed);
 	void drawLine();
 	void calcGunOffset(float speed);
+	void clampToCircle();
 };
 
 #endif // !VISOR_H
