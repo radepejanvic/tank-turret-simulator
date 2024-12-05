@@ -14,9 +14,6 @@
 #include <locale>
 #include <codecvt>
 
-std::vector<float> generateCircleVertices(float centerX, float centerY, float radius, int segments);
-unsigned int generateTexturedSquare(float x, float y, float a);
-unsigned int generateTexturedRect(float x, float y, float w, float h);
 // x, y represent center coords of a rectengle
 // s, t represent top left corner of the texture coords
 unsigned int generateTexturedRect(float x, float y, float w, float h, float s, float t, float tex_w, float tex_h);

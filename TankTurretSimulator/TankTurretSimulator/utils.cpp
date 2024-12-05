@@ -1,100 +1,6 @@
 #include "utils.h"
 #include <iostream>
 
-std::vector<float> generateCircleVertices(float centerX, float centerY, float radius, int segments)
-{
-    std::vector<float> vertices;
-
-    for (int i = 0; i < segments; ++i) {
-        float angle = (2.0f * M_PI * i) / segments;
-        float x = centerX + radius * cos(angle);
-        float y = centerY + radius * sin(angle);
-        vertices.push_back(x);
-        vertices.push_back(y);
-    }
-    
-    return vertices;
-}
-
-unsigned int generateTexturedSquare(float x, float y, float a)
-{
-	float base[] = {
-		x - a / 2, y + a / 2, 1.0,    0.0, 1.0,
-		x + a / 2, y + a / 2, 1.0,    1.0, 1.0,
-		x + a / 2, y - a / 2, 1.0,    1.0, 0.0,
-		x - a / 2, y - a / 2, 1.0,    0.0, 0.0
-	};
-
-	unsigned int indices[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(base), base, GL_STATIC_DRAW);
-
-	unsigned int EBO; 
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	return VAO; 
-}
-
-unsigned int generateTexturedRect(float x, float y, float w, float h)
-{
-	float base[] = {
-		x - w / 2, y + h / 2, 1.0,    0.0, 1.0,
-		x + w / 2, y + h / 2, 1.0,    1.0, 1.0,
-		x + w / 2, y - h / 2, 1.0,    1.0, 0.0,
-		x - w / 2, y - h / 2, 1.0,    0.0, 0.0
-	};
-
-	unsigned int indices[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(base), base, GL_STATIC_DRAW);
-
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	return VAO;
-}
 
 unsigned int generateTexturedRect(float x, float y, float w, float h, float s, float t, float tex_w, float tex_h)
 {
@@ -183,9 +89,9 @@ glm::mat3 generateRotationMat3(float x, float y, float angle)
     float sinA = glm::sin(angle);
 
     glm::mat3 transform = glm::mat3(
-        cosA,                    sinA,                    0,  // First column
-        -sinA,                   cosA,                    0,  // Second column
-        x - x * cosA + y * sinA, y - x * sinA - y * cosA, 1   // Third column
+        cosA,                    sinA,                    0,  
+        -sinA,                   cosA,                    0,  
+        x - x * cosA + y * sinA, y - x * sinA - y * cosA, 1   
     );
 
     return transform;
@@ -225,7 +131,7 @@ unsigned int loadTexture(const char* path)
 	}
 	else
 	{
-		std::cout << "ERROR::FAILED TO LOAD TEXTURE" << std::endl;
+		std::cout << "ERROR::TEXTURE: Failed to load" << std::endl;
 	}
 	stbi_image_free(data);
     

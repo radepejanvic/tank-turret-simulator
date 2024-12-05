@@ -7,7 +7,7 @@ const char* Panorama::TEXTURE = "winter.jpg";
 Panorama::Panorama(float x, float y, float w, float h): x(x), y(y), w(w), h(h), offset(0), shader(VERT_SHADER, FRAG_SHADER)
 {
 	texture = loadTexture(TEXTURE);
-	VAO = generateTexturedRect(x, y, w, h);
+	VAO = generateTexturedRect(x, y, w, h, 0.0, 1.0, 1.0, 1.0);
 }
 
 void Panorama::draw() const {
