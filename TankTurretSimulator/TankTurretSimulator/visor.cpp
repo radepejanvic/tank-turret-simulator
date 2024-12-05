@@ -11,7 +11,6 @@ Visor::Visor(float a): x(0), y(0), shader(VERT_SHADER, FRAG_SHADER)
 
 	generateDynamicLine(&lVAO, &lVBO);
 }
-
 void Visor::draw(float speed)
 {
 	drawCurr(speed);
@@ -73,32 +72,27 @@ void Visor::moveAim(float x, float y) {
 	mouseY = y;
 }
 
-void Visor::calcGunOffset(float speed) {
+float* Visor::getGunCoords()
+{
+	float coords[] = {x, y};
+	return coords;
+}
 
+void Visor::calcGunOffset(float speed) 
+{
 	float d = distance(x, y, mouseX, mouseY);
 	speed = speed < d ? speed : d;
 
 	float dX = std::abs(mouseX - x);
 	float dY = std::abs(mouseY - y);
 	float theta = std::atan(dY / dX);
-	//float speedX, speedY = 0;
-
-	//if (std::abs(mouseX) < speed)
-
+	
 	float speedX = std::cos(theta) * speed;
 	float speedY = std::sin(theta) * speed;
 
-	//std::cout << speedX << ", " << speedY<< std::endl;
 	if (x > mouseX) x -= speedX;
 	else if (x < mouseX) x += speedX; 
 
 	if (y > mouseY) y -= speedY;
 	else if (y < mouseY) y += speedY;
-
-	/*x = mouseX < x ? x - speedX : x + speedX;
-	y = mouseX < x ? x - speedY : x + speedY;*/
-
-	/*x += x;
-	y += y;*/
-	//std::cout << x << ", " << y << std::endl;
 }

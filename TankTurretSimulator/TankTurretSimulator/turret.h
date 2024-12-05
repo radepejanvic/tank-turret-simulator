@@ -7,6 +7,7 @@
 #include "panorama.h"
 #include "target.h"
 #include "timer.h"
+#include "visor.h"
 #include "text_handler.h"
 #include <GLFW/glfw3.h>
 
@@ -20,12 +21,14 @@ public:
 	void increaseV();
 	void decreaseV();
 	bool isEnd();
+	void moveAim(float mouseX, float mouseY);
 
 	static const char* SUCCESS;
 	static const char* FAIL;
 	static const char* SIGNATURE;
 private: 
-	float baseV, currV, lastT, currT, deltaT; 
+	float baseV, currV, lastT, currT, deltaT;
+	float mouseX, mouseY;
 	Ammo ammo; 
 	LED led; 
 	Voltmeter voltmeter;
@@ -33,6 +36,7 @@ private:
 	Target target;
 	Timer timer;
 	TextHandler textHandler;
+	Visor visor;
 };
 
 #endif // !TURRET_H

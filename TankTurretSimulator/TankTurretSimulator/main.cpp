@@ -79,8 +79,7 @@ int main(void)
     InputHandler::init(window, 1600, 900);
     
     Turret turret(0.01, "C:/Windows/Fonts/arial.ttf");
-    Visor visor(0.2);
-
+ 
     bool isEnterier = true; 
 
     glEnable(GL_BLEND);
@@ -88,8 +87,6 @@ int main(void)
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
     float currX, currY;
-
-
 
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
@@ -134,8 +131,7 @@ int main(void)
         InputHandler::getCursorPos(window, &currX, &currY);
 
         turret.draw(isEnterier); 
-        visor.moveAim(currX, currY);
-        visor.draw(0.005);
+        turret.moveAim(currX, currY);
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 

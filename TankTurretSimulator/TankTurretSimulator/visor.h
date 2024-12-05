@@ -15,6 +15,7 @@ public:
 	Visor(float a);
 	void draw(float speed);
 	void moveAim(float x, float y);
+	float* getGunCoords();
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;
