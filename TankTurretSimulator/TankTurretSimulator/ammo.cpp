@@ -2,7 +2,7 @@
 
 const char* Ammo::VERT_SHADER = "ammo.vert";
 const char* Ammo::FRAG_SHADER = "ammo.frag";
-const char* Ammo::TEXTURE = "Bullet.png";
+const char* Ammo::TEXTURE = "res/Bullet.png";
 
 Ammo::Ammo(float maxA, float x, float y, float w, float h, float margin) : maxA(maxA), currA(maxA), x(x), y(y), w(w), h(h), margin(margin), shader(VERT_SHADER, FRAG_SHADER)
 {

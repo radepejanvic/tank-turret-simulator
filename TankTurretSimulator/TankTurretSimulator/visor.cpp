@@ -2,7 +2,7 @@
 
 const char* Visor::VERT_SHADER = "visor.vert";
 const char* Visor::FRAG_SHADER = "visor.frag";
-const char* Visor::TEXTURE = "Aim2.png";
+const char* Visor::TEXTURE = "res/Aim2.png";
 
 Visor::Visor(float a): x(0), y(0), shader(VERT_SHADER, FRAG_SHADER)
 {
