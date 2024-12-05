@@ -31,7 +31,7 @@ void Visor::drawAim()
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	
-	glUseProgram(0);
+	shader.unbind();
 }
 
 void Visor::drawCurr(float speed)
@@ -48,7 +48,7 @@ void Visor::drawCurr(float speed)
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-	glUseProgram(0);
+	shader.unbind();
 }
 
 void Visor::drawLine()
@@ -65,7 +65,8 @@ void Visor::drawLine()
 	glBindVertexArray(lVAO);
 	glDrawArrays(GL_LINES, 0, 2);
 	glBindVertexArray(0);
-	glUseProgram(0);
+	
+	shader.unbind();
 }
 
 void Visor::moveAim(float x, float y) {

@@ -70,7 +70,7 @@ void Ammo::draw()
 		deltaY += margin + unit_h; 
 	}
 
-	glUseProgram(0);
+	shader.unbind();
 }
 
 bool Ammo::isEmpty()

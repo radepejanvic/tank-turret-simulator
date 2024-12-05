@@ -49,7 +49,7 @@ void Voltmeter::drawBase() const
 	shader.setBool("isLine", false);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-	glUseProgram(0);
+	shader.unbind();
 }
 
 void Voltmeter::drawLine() const
@@ -70,5 +70,5 @@ void Voltmeter::drawLine() const
 	glLineWidth(5.0f);
 	glDrawArrays(GL_LINES, 0, 2);
 
-	glUseProgram(0);
+	shader.unbind();
 }

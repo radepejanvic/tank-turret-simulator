@@ -19,7 +19,7 @@ void Panorama::draw() const {
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-	glUseProgram(0);
+	shader.unbind();
 }
 
 void Panorama::moveLeft(float speed)
