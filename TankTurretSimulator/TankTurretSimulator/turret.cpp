@@ -1,11 +1,8 @@
 #include "turret.h"
 
-const char* Turret::SUCCESS = "Mission Successful!";
-const char* Turret::FAIL = "Mission Failed!";
-const char* Turret::SIGNATURE = "Rade Pejanovic SV10/2021";
-
-Turret::Turret(float baseV, const char* fontPath): baseV(baseV), currV(baseV), deltaT(0.0), lastT(0.0), ammo(10, 0.75, -0.95, 0.2, 1.0, 0.02), led(0.65, -0.87, 0.1), voltmeter(20, 0.1, -0.8, -0.7, 0.3), panorama(0.0, 0.0, 7.0, 2.0), target(3, 0.05, 7.0, 2.0), timer(30.0), textHandler(fontPath), visor(0.2)
+Turret::Turret(float baseV, const char* fontPath, const char* textPath): baseV(baseV), currV(baseV), deltaT(0.0), lastT(0.0), ammo(10, 0.75, -0.95, 0.2, 1.0, 0.02), led(0.65, -0.87, 0.1), voltmeter(20, 0.1, -0.8, -0.7, 0.3), panorama(0.0, 0.0, 7.0, 2.0), target(3, 0.05, 7.0, 2.0), timer(30.0), textHandler(fontPath), visor(0.2)
 {
+    loadText(textPath);
 }
 
 void Turret::fire(float mouseX, float mouseY)
@@ -43,22 +40,21 @@ void Turret::draw(bool isEnterier)
 
     timer.update(deltaT);
 
-    std::string timerText = timer.getTimeString();
     glm::vec3 timerColor(0.5, 0.8f, 0.2f);
 
     if (!target.isEmpty()) {
         if (timer.isFinished()) {
-            textHandler.renderText(FAIL, 650.0f, 830.0f, 1.0f, glm::vec3(1.0f, 0.2f, 0.2f));
+            textHandler.renderText(lines[2], 650.0f, 830.0f, 1.0f, glm::vec3(1.0f, 0.2f, 0.2f));
         }
         else {
-            textHandler.renderText(timerText, 750.0f, 830.0f, 1.0f, timerColor);
+            textHandler.renderText(convertStringToWString(timer.getTimeString()), 750.0f, 830.0f, 1.0f, timerColor);
         }
     }
     else {
-        textHandler.renderText(SUCCESS, 620.0f, 830.0f, 1.0f, glm::vec3(0.2f, 1.0f, 0.2f));
+        textHandler.renderText(lines[1], 620.0f, 830.0f, 1.0f, glm::vec3(0.2f, 1.0f, 0.2f));
     }
 
-    textHandler.renderText(SIGNATURE, 30.0f, 870.0f, 0.3f, glm::vec3(0.2f, 1.0f, 0.2f));
+    textHandler.renderText(lines[0], 30.0f, 870.0f, 0.3f, glm::vec3(0.2f, 1.0f, 0.2f));
 }
 
 void Turret::increaseV()
@@ -92,4 +88,29 @@ void Turret::moveLeft()
 
 void Turret::moveAim(float mouseX, float mouseY) {
     visor.moveAim(mouseX, mouseY);
+}
+
+void Turret::loadText(const char* path)
+{
+    std::ifstream file(path);
+
+    if (!file) {
+        std::cerr << "TURRET::ERROR: Opening file: " << path << std::endl;
+        return;
+    }
+
+    std::string utf8Line;
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+
+    while (std::getline(file, utf8Line)) {
+        try {
+            std::wstring wideLine = converter.from_bytes(utf8Line);
+            lines.push_back(wideLine);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "TURRET::ERROR: Converting line to wide string: " << e.what() << std::endl;
+        }
+    }
+
+    file.close();
 }

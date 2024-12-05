@@ -48,7 +48,7 @@ int TextHandler::loadFont(const char* fontPath)
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); 
 
-	for (unsigned char c = 0; c < 128; c++)
+	for (wchar_t c = 32; c <= 0x017F; c++)
 	{
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 		{
@@ -82,7 +82,7 @@ int TextHandler::loadFont(const char* fontPath)
 			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 			face->glyph->advance.x
 		};
-		Characters.insert(std::pair<char, Character>(c, character));
+		Characters.insert(std::pair<wchar_t, Character>(c, character));
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	}
@@ -91,14 +91,14 @@ int TextHandler::loadFont(const char* fontPath)
 	FT_Done_FreeType(ft);
 }
 
-void TextHandler::renderText(std::string text, float x, float y, float scale, glm::vec3 color)
+void TextHandler::renderText(std::wstring text, float x, float y, float scale, glm::vec3 color)
 {
 	shader.use();
 	glUniform3f(glGetUniformLocation(0, "textColor"), color.x, color.y, color.z);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 
-	std::string::const_iterator c;
+	std::wstring::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
 		Character ch = Characters[*c];

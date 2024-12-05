@@ -10,10 +10,13 @@
 #include "visor.h"
 #include "text_handler.h"
 #include <GLFW/glfw3.h>
+#include <locale>
+#include <codecvt>
+#include <vector>
 
 class Turret {
 public: 
-	Turret(float baseV, const char* fontPath);
+	Turret(float baseV, const char* fontPath, const char* textPath);
 	void fire(float mouseX, float mouseY);
 	void draw(bool isEnterier);
 	void moveRight();
@@ -29,6 +32,7 @@ public:
 private: 
 	float baseV, currV, lastT, currT, deltaT;
 	float mouseX, mouseY;
+	std::vector<std::wstring> lines;
 	Ammo ammo; 
 	LED led; 
 	Voltmeter voltmeter;
@@ -37,6 +41,7 @@ private:
 	Timer timer;
 	TextHandler textHandler;
 	Visor visor;
+	void loadText(const char* path);
 };
 
 #endif // !TURRET_H

@@ -19,11 +19,11 @@ public:
 	};
 	unsigned int VAO, VBO;
 	Shader shader;
-	std::map<char, Character> Characters;
+	std::map<wchar_t, Character> Characters;
 
 	TextHandler(const char* fontPath); 
 	int loadFont(const char* fontPath);
-	void renderText(std::string text, float x, float y, float scale, glm::vec3 color);
+	void renderText(std::wstring text, float x, float y, float scale, glm::vec3 color);
 
 	static const char* VERT_SHADER;
 	static const char* FRAG_SHADER;

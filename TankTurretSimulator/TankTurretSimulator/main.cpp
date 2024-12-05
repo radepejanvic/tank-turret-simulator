@@ -26,8 +26,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-
-
 const int TARGET_FPS = 60;
 const int FRAME_DURATION_MS = 1000 / TARGET_FPS;
 
@@ -42,8 +40,6 @@ void limitFPS() {
     }
     lastFrameTime = std::chrono::high_resolution_clock::now();
 }
-
-
 
 int main(void)
 {
@@ -78,7 +74,7 @@ int main(void)
 
     InputHandler::init(window, 1600, 900);
     
-    Turret turret(0.01, "C:/Windows/Fonts/arial.ttf");
+    Turret turret(0.01, "LiberationSans-Regular.ttf", "texts.txt");
  
     bool isEnterier = true; 
 
@@ -136,7 +132,6 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents(); 
         limitFPS();
-
     }
 
     glfwTerminate();

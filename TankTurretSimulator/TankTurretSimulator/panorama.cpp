@@ -2,7 +2,7 @@
 
 const char* Panorama::VERT_SHADER = "panorama.vert";
 const char* Panorama::FRAG_SHADER = "panorama.frag";
-const char* Panorama::TEXTURE = "hills.jpg";
+const char* Panorama::TEXTURE = "winter.jpg";
 
 Panorama::Panorama(float x, float y, float w, float h): x(x), y(y), w(w), h(h), offset(0), shader(VERT_SHADER, FRAG_SHADER)
 {

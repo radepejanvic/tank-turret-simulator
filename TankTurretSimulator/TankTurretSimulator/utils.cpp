@@ -238,3 +238,9 @@ float distance(float x1, float y1, float x2, float y2)
 	float dy = y1 - y2;
 	return std::sqrt(dx * dx + dy * dy);
 }
+
+std::wstring convertStringToWString(const std::string& str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	return converter.from_bytes(str);
+}

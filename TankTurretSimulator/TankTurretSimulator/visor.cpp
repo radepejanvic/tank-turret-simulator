@@ -11,11 +11,12 @@ Visor::Visor(float a): x(0), y(0), shader(VERT_SHADER, FRAG_SHADER)
 
 	generateDynamicLine(&lVAO, &lVBO);
 }
+
 void Visor::draw(float speed)
 {
+	drawLine();
 	drawCurr(speed);
 	drawAim();
-	drawLine();
 }
 
 void Visor::drawAim()
