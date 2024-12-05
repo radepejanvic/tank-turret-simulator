@@ -44,6 +44,15 @@ void InputHandler::mouseButtonCallback(GLFWwindow* window, int button, int actio
     }
 }
 
+void InputHandler::getCursorPos(GLFWwindow* window, float *currMouseX, float* currMouseY) 
+{
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+
+    *currMouseX = (static_cast<float>(xpos) / width) * 2.0f - 1.0f;
+    *currMouseY = 1.0f - (static_cast<float>(ypos) / height) * 2.0f;
+}
+
 bool InputHandler::isKeyPressed(int key) {
     return keyStates[key];
 }

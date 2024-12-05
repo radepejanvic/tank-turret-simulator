@@ -43,9 +43,6 @@ void limitFPS() {
     lastFrameTime = std::chrono::high_resolution_clock::now();
 }
 
-Timer countdownTimer(60.0f);  // Initialize the timer with 60 seconds
-float deltaTime = 0.0f;  // Variable to store the time difference between frames
-float lastFrame = 0.0f;
 
 
 int main(void)
@@ -82,11 +79,17 @@ int main(void)
     InputHandler::init(window, 1600, 900);
     
     Turret turret(0.01, "C:/Windows/Fonts/arial.ttf");
+    Visor visor(0.2);
 
     bool isEnterier = true; 
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+    float currX, currY;
+
+
 
     glClearColor(0.8902, 0.8902, 0.8902, 1.0);
     while (!glfwWindowShouldClose(window)) 
@@ -128,8 +131,11 @@ int main(void)
             turret.fire(InputHandler::mouseX, InputHandler::mouseY);
         }
 
+        InputHandler::getCursorPos(window, &currX, &currY);
 
         turret.draw(isEnterier); 
+        visor.moveAim(currX, currY);
+        visor.draw(0.005);
 
         glfwSwapBuffers(window);
         glfwPollEvents(); 

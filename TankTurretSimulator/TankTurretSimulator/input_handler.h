@@ -13,6 +13,7 @@ public:
     static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
     static bool isMouseButtonPressed(int button);
     static bool isMouseButtonToggled(int button);
+    static void getCursorPos(GLFWwindow* window, float* currMouseX, float* currMouseY);
 
 private:
     static std::unordered_map<int, bool> keyStates;
