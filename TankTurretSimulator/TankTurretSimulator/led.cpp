@@ -6,7 +6,7 @@ const char* LED::TEXTURE = "Led.png";
 
 LED::LED(float x, float y, float a) : x(x), y(y), a(a), isOn(true), shader(VERT_SHADER, FRAG_SHADER)
 {
-    VAO = generateTexturedSquare(x, y, a);
+    VAO = generateTexturedRect(x, y, a, a, 0.0, 1.0, 1.0, 1.0);
 	texture = loadTexture(TEXTURE);
 }
 

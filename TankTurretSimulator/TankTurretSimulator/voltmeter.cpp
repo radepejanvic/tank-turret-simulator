@@ -8,7 +8,7 @@ const char* Voltmeter::TEXTURE = "Voltmeter3.png";
 
 Voltmeter::Voltmeter(float maxV, float step, float x, float y, float a): maxV(maxV), step(step), x(x), y(y), a(a), currV(0), shader(VERT_SHADER, FRAG_SHADER)
 {
-	bVAO = generateTexturedSquare(x, y, a);
+	bVAO = generateTexturedRect(x, y, a, a, 0.0, 1.0, 1.0, 1.0);
 	texture = loadTexture(TEXTURE);
 
 	lVAO = generateLine(x, y, x - 0.8 * a / 2, y); 

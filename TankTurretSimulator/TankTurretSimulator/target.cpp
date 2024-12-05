@@ -5,7 +5,7 @@ const char* Target::TEXTURE = "Target.png";
 
 Target::Target(unsigned int total, float a, float w, float h) : total(total), a(a), w(w), h(h), shader(VERT_SHADER, FRAG_SHADER)
 {
-	VAO = generateTexturedSquare(0.0, 0.0, a);
+	VAO = generateTexturedRect(0.0, 0.0, a, a, 0.0, 1.0, 1.0, 1.0);
 	texture = loadTexture(TEXTURE);
 
 	offset = 0.0;
