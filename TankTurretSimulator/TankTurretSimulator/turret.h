@@ -9,6 +9,7 @@
 #include "timer.h"
 #include "visor.h"
 #include "text_handler.h"
+#include "gun.h"
 #include <GLFW/glfw3.h>
 #include <locale>
 #include <codecvt>
@@ -41,6 +42,8 @@ private:
 	Timer timer;
 	TextHandler textHandler;
 	Visor visor;
+	Gun gun;
+
 	void loadText(const char* path);
 };
 

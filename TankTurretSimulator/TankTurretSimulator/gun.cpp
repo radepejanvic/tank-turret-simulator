@@ -1,0 +1,23 @@
+#include "gun.h"
+
+const char* Gun::VERT_SHADER="gun.vert";
+const char* Gun::FRAG_SHADER="gun.frag";
+const char* Gun::TEXTURE="Gun.png";
+
+Gun::Gun(float x, float y, float w, float h): shader(VERT_SHADER, FRAG_SHADER)
+{
+	VAO = generateTexturedRect(x, y, w, h, 0.0, 1.0, 1.0, 1.0);
+	texture = loadTexture(TEXTURE);
+}
+
+void Gun::draw()
+{
+	shader.use();
+	glBindTexture(GL_TEXTURE_2D, texture);
+	shader.setInt("aTexture", 0);
+
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+	glUseProgram(0);
+}

@@ -1,6 +1,6 @@
 #include "turret.h"
 
-Turret::Turret(float baseV, const char* fontPath, const char* textPath): baseV(baseV), currV(baseV), deltaT(0.0), lastT(0.0), ammo(10, 0.75, -0.95, 0.2, 1.0, 0.02), led(0.65, -0.87, 0.1), voltmeter(20, 0.1, -0.8, -0.7, 0.3), panorama(0.0, 0.0, 7.0, 2.0), target(3, 0.05, 7.0, 2.0), timer(30.0), textHandler(fontPath), visor(0.2)
+Turret::Turret(float baseV, const char* fontPath, const char* textPath): baseV(baseV), currV(baseV), deltaT(0.0), lastT(0.0), ammo(10, 0.75, -0.95, 0.2, 1.0, 0.02), led(0.65, -0.87, 0.1), voltmeter(20, 0.1, -0.8, -0.7, 0.3), panorama(0.0, 0.0, 7.0, 2.0), target(3, 0.05, 7.0, 2.0), timer(30.0), textHandler(fontPath), visor(0.2), gun(0.0, -0.6, 0.15, 0.47)
 {
     loadText(textPath);
 }
@@ -28,7 +28,9 @@ void Turret::draw(bool isEnterier)
         panorama.draw(); 
         target.draw();
         visor.draw(currV/5);
+        gun.draw();
     } 
+
     ammo.draw();
     led.draw();
     voltmeter.draw();
