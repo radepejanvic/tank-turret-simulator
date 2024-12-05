@@ -56,8 +56,7 @@ int main(void)
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
-    //GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Tank Turret Simulator", monitor, NULL);
-    GLFWwindow* window = glfwCreateWindow(1600, 900, "Tank Turret Simulator", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Tank Turret Simulator", monitor, NULL);
     if (window == NULL) 
     {
         std::cout << "WINDOW::NOT_CREATED" << std::endl;
@@ -72,7 +71,7 @@ int main(void)
         return 3;
     }
 
-    InputHandler::init(window, 1600, 900);
+    InputHandler::init(window, mode->width, mode->height);
     
     Turret turret(0.01, "LiberationSans-Regular.ttf", "texts.txt");
  
