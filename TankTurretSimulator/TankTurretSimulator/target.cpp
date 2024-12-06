@@ -1,6 +1,6 @@
 #include "target.h"
-const char* Target::VERT_SHADER = "target.vert";
-const char* Target::FRAG_SHADER = "target.frag";
+const char* Target::VERT_SHADER = "transform.vert";
+const char* Target::FRAG_SHADER = "basic.frag";
 const char* Target::TEXTURE = "res/Target.png";
 
 Target::Target(unsigned int total, float a, float w, float h) : total(total), a(a), w(w), h(h), shader(VERT_SHADER, FRAG_SHADER)

@@ -1,7 +1,7 @@
 #include "gun.h"
 
-const char* Gun::VERT_SHADER="gun.vert";
-const char* Gun::FRAG_SHADER="gun.frag";
+const char* Gun::VERT_SHADER="basic.vert";
+const char* Gun::FRAG_SHADER="basic.frag";
 const char* Gun::TEXTURE="res/Gun.png";
 
 Gun::Gun(float x, float y, float w, float h): shader(VERT_SHADER, FRAG_SHADER)

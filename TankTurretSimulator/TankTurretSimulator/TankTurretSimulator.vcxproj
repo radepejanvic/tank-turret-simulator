@@ -133,18 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ammo.frag" />
-    <None Include="ammo.vert" />
-    <None Include="gun.frag" />
-    <None Include="gun.vert" />
+    <None Include="basic.frag" />
+    <None Include="transform.vert" />
     <None Include="led.frag" />
-    <None Include="led.vert" />
+    <None Include="basic.vert" />
     <None Include="line.vert" />
     <None Include="packages.config" />
     <None Include="panorama.frag" />
     <None Include="panorama.vert" />
-    <None Include="target.frag" />
-    <None Include="target.vert" />
     <None Include="text.frag" />
     <None Include="text.vert" />
     <None Include="visor.frag" />

@@ -1,6 +1,6 @@
 #include "led.h"
 
-const char* LED::VERT_SHADER = "led.vert";
+const char* LED::VERT_SHADER = "basic.vert";
 const char* LED::FRAG_SHADER = "led.frag";
 const char* LED::TEXTURE = "res/Led.png";
 
