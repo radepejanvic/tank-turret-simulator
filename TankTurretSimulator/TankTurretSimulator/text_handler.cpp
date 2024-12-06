@@ -94,7 +94,8 @@ int TextHandler::loadFont(const char* fontPath)
 void TextHandler::renderText(std::wstring text, float x, float y, float scale, glm::vec3 color)
 {
 	shader.use();
-	glUniform3f(glGetUniformLocation(0, "textColor"), color.x, color.y, color.z);
+	shader.setVec3("textColor", color);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 

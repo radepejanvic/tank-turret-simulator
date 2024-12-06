@@ -35,6 +35,7 @@ private:
 	float baseV, currV, lastT, currT, deltaT;
 	float mouseX, mouseY;
 	std::vector<std::wstring> lines;
+	glm::vec3 color;
 	Ammo ammo; 
 	LED led; 
 	Voltmeter voltmeter;
