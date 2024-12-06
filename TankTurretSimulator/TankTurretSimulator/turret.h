@@ -8,6 +8,7 @@
 #include "target.h"
 #include "timer.h"
 #include "visor.h"
+#include "interior.h"
 #include "text_handler.h"
 #include "gun.h"
 #include <GLFW/glfw3.h>
@@ -19,7 +20,7 @@ class Turret {
 public: 
 	Turret(float baseV, const char* fontPath, const char* textPath);
 	void fire(float mouseX, float mouseY);
-	void draw(bool isEnterier);
+	void draw(bool isInterior);
 	void moveRight();
 	void moveLeft(); 
 	void increaseV();
@@ -43,6 +44,7 @@ private:
 	TextHandler textHandler;
 	Visor visor;
 	Gun gun;
+	Interior interior;
 
 	void loadText(const char* path);
 };

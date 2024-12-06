@@ -73,9 +73,9 @@ int main(void)
 
     InputHandler::init(window, mode->width, mode->height);
     
-    Turret turret(0.01, "LiberationSans-Regular.ttf", "texts.txt");
+    Turret turret(0.01, "res/LiberationSans-Regular.ttf", "res/texts.txt");
  
-    bool isEnterier = true; 
+    bool isInterior = true; 
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -104,11 +104,11 @@ int main(void)
         }
 
         if (InputHandler::isKeyPressed(GLFW_KEY_V)) {
-            isEnterier = false;
+            isInterior = false;
         }
 
         if (InputHandler::isKeyPressed(GLFW_KEY_C)) {
-            isEnterier = true;
+            isInterior = true;
         }
 
         if (InputHandler::isKeyPressed(GLFW_KEY_S)) {
@@ -125,7 +125,7 @@ int main(void)
 
         InputHandler::getCursorPos(window, &currX, &currY);
 
-        turret.draw(isEnterier); 
+        turret.draw(isInterior); 
         turret.moveAim(currX, currY);
 
         glfwSwapBuffers(window);

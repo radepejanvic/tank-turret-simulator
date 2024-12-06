@@ -152,6 +152,7 @@
     <ClCompile Include="ammo.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="input_handler.cpp" />
+    <ClCompile Include="interior.cpp" />
     <ClCompile Include="led.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="panorama.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="ammo.h" />
     <ClInclude Include="gun.h" />
     <ClInclude Include="input_handler.h" />
+    <ClInclude Include="interior.h" />
     <ClInclude Include="led.h" />
     <ClInclude Include="panorama.h" />
     <ClInclude Include="shader.h">
